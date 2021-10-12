@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h1>Exam 1</h1>
+<p>Test</p>
+
+<ol id="myList">
+</ol>
+
+<script>
+    fetch('https://join.reckon.com/test1/rangeInfo')
+    .then(response => response.json())
+    .then(data => {
+        let lower = data.lower;
+        let upper = data.upper;
+
+        fetch('https://join.reckon.com/test1/divisorInfo')
+        .then(response=> response.json())
+        .then(data=>{
+
+            let peppa = data.outputDetails[0];
+            let pig = data.outputDetails[1];
+            // console.log(peppa);
+            // console.log(peppa);
+            // console.log(upper) 
+            let o = document.getElementById('myList');  
+            let html = '';         
+            for(var i = lower+1; i<=upper;i++){               
+                if((i%peppa.divisor)==0){
+                    var x = document.createElement("LI");
+                    var t = document.createTextNode(`${peppa.output}`);
+                    x.appendChild(t);
+                    o.appendChild(x);
+                }else if((i%pig.divisor)==0){
+                    var x = document.createElement("LI");
+                    var t = document.createTextNode(`${pig.output}`);
+                    x.appendChild(t);
+                    o.appendChild(x);
+                }else{
+                    var x = document.createElement("LI");
+                    var t = document.createTextNode(``);
+                    x.appendChild(t);
+                    o.appendChild(x);
+                }
+            }
+        });
+    });
+
+</script>
+</body>
+</html>
